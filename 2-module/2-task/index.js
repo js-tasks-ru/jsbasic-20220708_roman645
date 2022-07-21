@@ -1,6 +1,8 @@
 function isEmpty(obj) {
   for (let key in obj) {
-    return false;
-  }
+    if (obj.hasOwnProperty(key)) {
+      return false;
+    };
+  };
   return true;
-}
+};
