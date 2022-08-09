@@ -1,9 +1,14 @@
 function toggleText() {
-let tglTxtBtn = document.getElementById("text");
-  if (tglTxtBtn.hidden === true) {
-    tglTxtBtn.hidden = false;
-  } else {
-    tglTxtBtn.hidden = true;
-  }
-  document.addEventListener('click', toggleText, );
-}
+  let txt = document.getElementById("text");
+  let tglTxtBtn = document.querySelector(".toggle-text-button");
+
+  tglTxtBtn.addEventListener('click', hiddenCheck);
+  
+  function hiddenCheck() {
+    if (txt.hidden === true) {
+      txt.hidden = false;
+    } else {
+      txt.hidden = true;
+    };
+  };
+};
