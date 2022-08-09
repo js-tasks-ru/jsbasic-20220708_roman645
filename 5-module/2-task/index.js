@@ -7,5 +7,3 @@ let tglTxtBtn = document.getElementById("text");
   }
   document.addEventListener('click', toggleText, );
 }
-
-toggleText();
