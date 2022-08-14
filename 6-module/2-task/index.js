@@ -1,45 +1,45 @@
+import createElement from '../../assets/lib/create-element.js';
+ 
 export default class ProductCard {
-  
-  constructor(productCard) {
-   
-    
-
-
-    
-    html(); {
-      let template = createElement(`  
-      <div class="card">
-      ${this.product.map(obj =>
-        `
-    <div class="card__top">
-        <img src="/assets/images/products/${obj.image}" class="card__image" alt="product">
-        <span class="card__price">€${obj.price}</span>
-    </div>
-    <div class="card__body">
-        <div class="card__title">${obj.name}</div>
+  #card;
+  product;
+ 
+  constructor(product) {
+  this.product = product;
+  this.#create_card();  
+  this.#eventListen();  
+  }
+ 
+  #create_card() {
+    this.#card = createElement(
+      `   <div class="card">
+      <div class="card__top">
+        <img src="/assets/images/products/${this.product.image}" class="card__image" alt="product">
+          <span class="card__price">€${this.product.price.toFixed(2)}</span>
+      </div>
+      <div class="card__body">
+        <div class="card__title">${this.product.name}</div>
         <button type="button" class="card__button">
-            <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+          <img src="/assets/images/icons/plus-icon.svg" alt="icon">
         </button>
-    </div>
-    `).join('')}
-</div> `)
-this.elem.innerHTML = template; 
+      </div>
+    </div>`
+    );
+  }
+
+  get elem(){return this.#card}
+ 
+  #eventListen() {
+    const handlerClick = (event)=> {
+      if(event.target.closest(".card__button")) {
+        let custEvent = new CustomEvent("product-add", { 
+          detail: this.product.id, 
+          bubbles: true 
+        });
+        this.#card.dispatchEvent(custEvent);
+        console.log(event);
+      }
     }
-    deleteRow(); {
-      for (const button of this.elem.querySelectorAll("button"))
-        button.addEventListener('click', (event) =>
-        event.target.closest("tr").remove())
-    }
+   this.#card.addEventListener('click', handlerClick);
   }
 }
-
-let product = {
-  name: "Laab kai chicken salad", // название товара
-  price: 10, // цена товара
-  category: "salads", // категория, к которой он относится, нам это понадобится чуть позже
-  image: "laab_kai_chicken_salad.png", // название картинки товара
-  id: "laab-kai-chicken-salad" // уникальный идентификатор товара, нужен для добавления товара в корзину
-}
-
-let productCard = new ProductCard(product);
-
