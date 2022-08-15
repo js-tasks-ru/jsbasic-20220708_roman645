@@ -1,5 +1,3 @@
-import createElement from '../../assets/lib/create-element.js';
-
 export default class Carousel {
   #carus;
  
@@ -40,42 +38,45 @@ export default class Carousel {
  
     this.#carus.querySelector(`.carousel__inner`).append(...slides);
   }
-
+ 
   #initCarousel() {
+    let slidesLength = this.slides.length; //ТУТ ИСПРАВИЛ
     let carouselElem = this.#carus;
-    let btnNext = carouselElem.querySelector(".carousel__arrow_right");
-    let btnPrev = carouselElem.querySelector(".carousel__arrow_left");
-    let slider = carouselElem.querySelector(".carousel__inner");
-    let counter = 0;
+    let carouselArrowRight= carouselElem.querySelector(".carousel__arrow_right");
+    let carouselArrowLeft= carouselElem.querySelector(".carousel__arrow_left");
+    let carouselinner = carouselElem.querySelector(".carousel__inner")
+    let count = 1;
     let transition = 0;
-  
-    btnPrev.style.display = 'none';
-  
-    btnNext.addEventListener("click", function () {
-          let width = slider.offsetWidth;
-          counter++;
-          transition += width;
-          slider.style.transform = `translateX(-${transition}px)`; 
-          btnPrev.style.display = '';
-        if (counter == 3) { 
-          btnNext.style.display = 'none'; 
-        };
-    });
-   
-    btnPrev.addEventListener("click", function () {
-          let width = slider.offsetWidth;
-          counter--; 
-          transition -= width;
-          slider.style.transform = `translateX(-${transition}px)`;
-          btnNext.style.display = ''; 
-        if (counter == 0) { 
-          btnPrev.style.display = 'none';
-        }
-    })
+ 
+    carouselArrowRight.style.display = '';
+    carouselArrowLeft.style.display = 'none';
+ 
+    carouselElem.addEventListener("click", handler);
+ 
+    function handler(e) {
+      let width = carouselinner.offsetWidth; //ТУТ ИСПРАВИЛ
+ 
+      if (e.target.closest('.carousel__arrow_right')) { //ТУТ ИСПРАВИЛ
+        console.log(width);
+        transition += width;
+        carouselinner.style.transform = `translateX(-${transition}px)`;
+        count++;
+        console.log(transition);
+      }
+ 
+      else if (e.target.closest('.carousel__arrow_left')) { //ТУТ ИСПРАВИЛ
+        transition -= width;
+        carouselinner.style.transform = `translateX(-${transition}px)`;
+        count--
+      };
+ 
+      count === 1 ? carouselArrowLeft.style.display = 'none' :   carouselArrowLeft.style.display = '';
+      count >=  slidesLength ? carouselArrowRight.style.display = 'none' :   carouselArrowRight.style.display = ''; //ТУТ ИСПРАВИЛ
+    }
   }
-
+ 
   get elem() {
     return this.#carus
   }
-
+ 
 }
