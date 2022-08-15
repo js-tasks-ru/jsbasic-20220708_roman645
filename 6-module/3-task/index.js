@@ -1,3 +1,5 @@
+import createElement from '../../assets/lib/create-element.js';
+
 export default class Carousel {
   #carus;
  
@@ -40,7 +42,7 @@ export default class Carousel {
   }
  
   #initCarousel() {
-    let slidesLength = this.slides.length; //ТУТ ИСПРАВИЛ
+    let slidesLength = this.slides.length; 
     let carouselElem = this.#carus;
     let carouselArrowRight= carouselElem.querySelector(".carousel__arrow_right");
     let carouselArrowLeft= carouselElem.querySelector(".carousel__arrow_left");
@@ -54,9 +56,9 @@ export default class Carousel {
     carouselElem.addEventListener("click", handler);
  
     function handler(e) {
-      let width = carouselinner.offsetWidth; //ТУТ ИСПРАВИЛ
+      let width = carouselinner.offsetWidth; 
  
-      if (e.target.closest('.carousel__arrow_right')) { //ТУТ ИСПРАВИЛ
+      if (e.target.closest('.carousel__arrow_right')) { 
         console.log(width);
         transition += width;
         carouselinner.style.transform = `translateX(-${transition}px)`;
@@ -64,14 +66,14 @@ export default class Carousel {
         console.log(transition);
       }
  
-      else if (e.target.closest('.carousel__arrow_left')) { //ТУТ ИСПРАВИЛ
+      else if (e.target.closest('.carousel__arrow_left')) { 
         transition -= width;
         carouselinner.style.transform = `translateX(-${transition}px)`;
         count--
       };
  
       count === 1 ? carouselArrowLeft.style.display = 'none' :   carouselArrowLeft.style.display = '';
-      count >=  slidesLength ? carouselArrowRight.style.display = 'none' :   carouselArrowRight.style.display = ''; //ТУТ ИСПРАВИЛ
+      count >=  slidesLength ? carouselArrowRight.style.display = 'none' :   carouselArrowRight.style.display = ''; 
     }
   }
  
