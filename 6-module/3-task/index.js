@@ -47,12 +47,12 @@ export default class Carousel {
     let btnPrev = carouselElem.querySelector(".carousel__arrow_left");
     let slider = carouselElem.querySelector(".carousel__inner");
     let counter = 0;
-    let width = slider.offsetWidth;
     let transition = 0;
   
     btnPrev.style.display = 'none';
   
     btnNext.addEventListener("click", function () {
+          let width = slider.offsetWidth;
           counter++;
           transition += width;
           slider.style.transform = `translateX(-${transition}px)`; 
@@ -63,6 +63,7 @@ export default class Carousel {
     });
    
     btnPrev.addEventListener("click", function () {
+          let width = slider.offsetWidth;
           counter--; 
           transition -= width;
           slider.style.transform = `translateX(-${transition}px)`;
