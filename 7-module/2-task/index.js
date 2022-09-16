@@ -22,10 +22,10 @@ export default class Modal {
       </div>
      `)
     }
-     
+    // метод для открытия модального окна  
     open() {
-      document.body.append(this.modal)
-      document.body.classList.add('is-modal-open')
+      document.body.append(this.modal) //вставляем вёрстку модального окна в body 
+      document.body.classList.add('is-modal-open') //добавляем класс для body
   
       this.modal.addEventListener('click', event => this._clickCross(event))
       this._listenerKeydown = event => this._escClick(event)
@@ -43,20 +43,20 @@ export default class Modal {
       modalBody.innerHTML = ''
       modalBody.append(body)
     }
-  
+     //закрытие модального окна
     close() {
       this.modal.remove()
       document.body.classList.remove('is-modal-open')
       document.removeEventListener('keydown', this._listenerKeydown)
     }
-  
+    //закрытие при нажатии на крестик
     _clickCross(event) {
       if (event.target.closest('.modal__close')) {
         event.preventDefault()
         this.close()
       }
     }
-  
+    //закрытие при нажатии ESC
     _escClick(event) {
       if (event.code === 'Escape') {
         event.preventDefault()
